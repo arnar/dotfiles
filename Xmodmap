@@ -1,0 +1,3 @@
+keycode 49 = dead_abovering dead_diaeresis dead_grave notsign
+remove Lock = Caps_Lock
+keysym Caps_Lock = Escape
