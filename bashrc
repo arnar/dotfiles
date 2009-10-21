@@ -80,7 +80,10 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# For fancy prompts
+# Fancy prompt stuff
+
+# Version control msgs from +
+# http://ciaranm.wordpress.com/2008/07/16/git-and-subversion-information-in-the-bash-prompt/
 ps_scm_f() {
     local s=
     if [[ -d ".svn" ]] ; then
@@ -137,6 +140,38 @@ ps_scm_f() {
     echo -n "$s"
 }
 
+# Horrible horrible path shortening by me
+# .. works like I want it, so stick your *cough*uglycode*cough* remarks
+bash_prompt_command() {
+    # How many characters of the $PWD should be kept
+    local pwdmaxlen=25
+    local pwd=${PWD/#$HOME/\~}
+    local prevpwd=${pwd}
+    local truncations=0
+    while [ ${#pwd} -gt $pwdmaxlen ]; do
+        prevpwd=$pwd
+        pwd=$(echo $pwd | sed 's/\/\(.\)[^\/]\+\//\/\1\//')
+        if [ $pwd = $prevpwd ]; then 
+            break; 
+        else
+            truncations=$((truncations + 1))
+        fi
+    done
+    # Indicate that there has been dir truncation
+    NEW_PWD=$pwd
+    NEW_PWD_REST=${NEW_PWD}
+    NEW_PWD_TRUNC=""
+    if [ $truncations -gt "0" ]; then
+        if [ ${pwd:0:1} = '~' ]; then
+            NEW_PWD_TRUNC=${pwd:0:$(($truncations * 2 + 2))}
+            NEW_PWD_REST=${pwd:$(($truncations * 2 + 2))}
+        else
+            NEW_PWD_TRUNC=${pwd:0:$(($truncations * 2 + 1))}
+            NEW_PWD_REST=${pwd:$(($truncations * 2 + 1))}
+        fi
+    fi
+}
+
 bash_prompt() {
     case $TERM in
      xterm*|rxvt*)
@@ -185,36 +220,6 @@ bash_prompt() {
     #PS1="$TITLEBAR ${EMK}[${UC}\u${EMK}@${UC}\h ${EMB}\${NEW_PWD}${EMK}]${UC}\\$ ${NONE}"
     # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
     # extra backslash in front of \$ to make bash colorize the prompt
-}
-
-bash_prompt_command() {
-    # How many characters of the $PWD should be kept
-    local pwdmaxlen=25
-    local pwd=${PWD/#$HOME/\~}
-    local prevpwd=${pwd}
-    local truncations=0
-    while [ ${#pwd} -gt $pwdmaxlen ]; do
-        prevpwd=$pwd
-        pwd=$(echo $pwd | sed 's/\/\(.\)[^\/]\+\//\/\1\//')
-        if [ $pwd = $prevpwd ]; then 
-            break; 
-        else
-            truncations=$((truncations + 1))
-        fi
-    done
-    # Indicate that there has been dir truncation
-    NEW_PWD=$pwd
-    NEW_PWD_REST=${NEW_PWD}
-    NEW_PWD_TRUNC=""
-    if [ $truncations -gt "0" ]; then
-        if [ ${pwd:0:1} = '~' ]; then
-            NEW_PWD_TRUNC=${pwd:0:$(($truncations * 2 + 2))}
-            NEW_PWD_REST=${pwd:$(($truncations * 2 + 2))}
-        else
-            NEW_PWD_TRUNC=${pwd:0:$(($truncations * 2 + 1))}
-            NEW_PWD_REST=${pwd:$(($truncations * 2 + 1))}
-        fi
-    fi
 }
 
 PROMPT_COMMAND=bash_prompt_command
