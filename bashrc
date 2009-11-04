@@ -75,6 +75,9 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+# compleat, completion for humans
+source /usr/local/share/compleat-1.0/compleat_setup
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
