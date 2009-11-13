@@ -229,6 +229,10 @@ PROMPT_COMMAND=bash_prompt_command
 bash_prompt
 unset bash_prompt
 
+# GO (Issue9) stuff
+export GOROOT=$HOME/go
+export GOOS=linux
+export GOARCH=386
 
 echo
 fortune
