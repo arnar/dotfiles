@@ -151,10 +151,10 @@ bash_prompt_command() {
     local pwd=${PWD/#$HOME/\~}
     local prevpwd=${pwd}
     local truncations=0
-    while [ ${#pwd} -gt $pwdmaxlen ]; do
+    while [ "${#pwd}" -gt "$pwdmaxlen" ]; do
         prevpwd=$pwd
         pwd=$(echo $pwd | sed 's/\/\(.\)[^\/]\+\//\/\1\//')
-        if [ $pwd = $prevpwd ]; then 
+        if [ "$pwd" = "$prevpwd" ]; then 
             break; 
         else
             truncations=$((truncations + 1))
@@ -164,8 +164,8 @@ bash_prompt_command() {
     NEW_PWD=$pwd
     NEW_PWD_REST=${NEW_PWD}
     NEW_PWD_TRUNC=""
-    if [ $truncations -gt "0" ]; then
-        if [ ${pwd:0:1} = '~' ]; then
+    if [ "$truncations" -gt "0" ]; then
+        if [ "${pwd:0:1}" = '~' ]; then
             NEW_PWD_TRUNC=${pwd:0:$(($truncations * 2 + 2))}
             NEW_PWD_REST=${pwd:$(($truncations * 2 + 2))}
         else
@@ -233,6 +233,11 @@ unset bash_prompt
 export GOROOT=$HOME/go
 export GOOS=linux
 export GOARCH=386
+
+function shareit { 
+    scp $1 blackhole.hvergi.net:/home/arnar/public_html; 
+    echo "http://www.hvergi.net/arnar/public/$(basename $1)" | xclip ; 
+}
 
 echo
 fortune
