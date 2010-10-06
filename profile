@@ -20,3 +20,9 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+# Add local definitions if found
+if [ -x "$HOME/.profile_local" ]; then
+    . "$HOME/.profile_local"
+fi
+
