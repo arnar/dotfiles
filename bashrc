@@ -98,7 +98,7 @@ ps_scm_f() {
         s="(r$r$(svn status | grep -q -v '^?' && echo -n "*" ))"
     else
         local d=$(git rev-parse --git-dir 2>/dev/null ) b= r= a=
-        if [[ -n "${d}" ]] ; then
+        if [[ (-n "${d}") && (${PWD}/ != $(realpath $(git rev-parse --git-dir))/*) ]] ; then
             if [[ -d "${d}/../.dotest" ]] ; then
                 if [[ -f "${d}/../.dotest/rebase" ]] ; then
                     r="rebase"
