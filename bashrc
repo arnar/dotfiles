@@ -165,18 +165,21 @@ bash_prompt_command() {
         fi
     done
     # Indicate that there has been dir truncation
-    NEW_PWD=$pwd
-    NEW_PWD_REST=${NEW_PWD}
-    NEW_PWD_TRUNC=""
+    local new_pwd_rest=$pwd
+    local new_pwd_trunc=""
     if [ "$truncations" -gt "0" ]; then
         if [ "${pwd:0:1}" = '~' ]; then
-            NEW_PWD_TRUNC=${pwd:0:$(($truncations * 2 + 2))}
-            NEW_PWD_REST=${pwd:$(($truncations * 2 + 2))}
+            new_pwd_trunc=${pwd:0:$(($truncations * 2 + 2))}
+            new_pwd_rest=${pwd:$(($truncations * 2 + 2))}
         else
-            NEW_PWD_TRUNC=${pwd:0:$(($truncations * 2 + 1))}
-            NEW_PWD_REST=${pwd:$(($truncations * 2 + 1))}
+            new_pwd_trunc=${pwd:0:$(($truncations * 2 + 1))}
+            new_pwd_rest=${pwd:$(($truncations * 2 + 1))}
         fi
     fi
+    local new_pwd=$blue$new_pwd_trunc$BLUE$new_pwd_rest$colors_reset
+
+    # Set this every time so that we can use colours in the variables
+    PS1="${debian_chroot:+($debian_chroot)}$green\u@\h$colors_reset:$new_pwd$(parse_vcs_status)$colors_reset\$ "
 }
 
 bash_prompt() {
@@ -223,11 +226,10 @@ bash_prompt() {
     local UC=$W                 # user's color
     [ $UID -eq "0" ] && UC=$R   # root's color
 
-    PS1="\${debian_chroot:+(\$debian_chroot)}${G}\u@\h${NONE}:${B}\${NEW_PWD_TRUNC}${EMB}\${NEW_PWD_REST}$C\$(ps_scm_f)${NONE}\$ "
-    #PS1="$TITLEBAR ${EMK}[${UC}\u${EMK}@${UC}\h ${EMB}\${NEW_PWD}${EMK}]${UC}\\$ ${NONE}"
-    # without colors: PS1="[\u@\h \${NEW_PWD}]\\$ "
-    # extra backslash in front of \$ to make bash colorize the prompt
+    #PS1="\${debian_chroot:+(\$debian_chroot)}${G}\u@\h${NONE}:${B}\${NEW_PWD_TRUNC}${EMB}\${NEW_PWD_REST}\$head_local${NONE}\$ "
 }
+
+[[ $- == *i* ]] && . ~/.dotfiles/git-prompt.sh
 
 PROMPT_COMMAND=bash_prompt_command
 bash_prompt
