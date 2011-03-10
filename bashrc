@@ -245,6 +245,9 @@ function shareit {
     echo "http://www.hvergi.net/arnar/public/$(basename $1)" | xclip ; 
 }
 
+# For python interpreter
+export PYTHONSTARTUP=~/.dotfiles/pystartup
+
 echo
 fortune
 echo
