@@ -72,6 +72,8 @@ fi
 #alias l='ls -CF'
 alias vol="amixer sset Master"
 alias f="xdg-open"
+alias ack="ack-grep"
+alias vi="vim"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -81,7 +83,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # compleat, completion for humans
-source /usr/local/share/compleat-1.0/compleat_setup
+# source /usr/local/share/compleat-1.0/compleat_setup
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -148,6 +150,12 @@ ps_scm_f() {
     echo -n "$s"
 }
 
+virtualenv_name() {
+    if [[ -n ${VIRTUAL_ENV} ]]; then
+        echo "($(basename ${VIRTUAL_ENV}))"
+    fi
+}
+
 # Horrible horrible path shortening by me
 # .. works like I want it, so stick your *cough*uglycode*cough* remarks
 bash_prompt_command() {
@@ -180,7 +188,7 @@ bash_prompt_command() {
     local new_pwd=$blue$new_pwd_trunc$BLUE$new_pwd_rest$colors_reset
 
     # Set this every time so that we can use colours in the variables
-    PS1="${debian_chroot:+($debian_chroot)}$green\u@\h$colors_reset:$new_pwd$(parse_vcs_status)$colors_reset\$ "
+    PS1="${debian_chroot:+($debian_chroot)}$(virtualenv_name)$green\u@\h$colors_reset:$new_pwd$(parse_vcs_status)$colors_reset\$ "
 }
 
 bash_prompt() {
@@ -248,6 +256,11 @@ function shareit {
 
 # For python interpreter
 export PYTHONSTARTUP=~/.dotfiles/pystartup
+
+# Virtualenv
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/chalmers
+source /usr/local/bin/virtualenvwrapper.sh
 
 echo
 fortune
