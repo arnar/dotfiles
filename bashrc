@@ -59,7 +59,7 @@ esac
 #fi
 
 # enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ]; then
+if [[ "$TERM" != "dumb" && "$(uname)" != "Darwin" ]]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
     #alias dir='ls --color=auto --format=vertical'
@@ -70,10 +70,15 @@ fi
 #alias ll='ls -l'
 #alias la='ls -A'
 #alias l='ls -CF'
-alias vol="amixer sset Master"
-alias f="xdg-open"
-alias ack="ack-grep"
-alias vi="vim"
+if [ "$(uname)" != "Darwin" ]; then
+    alias vol="amixer sset Master"
+    alias f="xdg-open"
+    alias ack="ack-grep"
+    alias vi="vim"
+else
+    alias f="open"
+    alias vi="mvim"
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -92,64 +97,6 @@ fi
 
 # Fancy prompt stuff
 
-# Version control msgs from +
-# http://ciaranm.wordpress.com/2008/07/16/git-and-subversion-information-in-the-bash-prompt/
-ps_scm_f() {
-    local s=
-    if [[ -d ".svn" ]] ; then
-        local r=$(svn info | sed -n -e '/^Revision: \([0-9]*\).*$/s//\1/p' )
-        s="(r$r$(svn status | grep -q -v '^?' && echo -n "*" ))"
-    else
-        local d=$(git rev-parse --git-dir 2>/dev/null ) b= r= a=
-        if [[ (-n "${d}") && (${PWD}/ != $(realpath $(git rev-parse --git-dir))/*) ]] ; then
-            if [[ -d "${d}/../.dotest" ]] ; then
-                if [[ -f "${d}/../.dotest/rebase" ]] ; then
-                    r="rebase"
-                elif [[ -f "${d}/../.dotest/applying" ]] ; then
-                    r="am"
-                else
-                    r="???"
-                fi
-                b=$(git symbolic-ref HEAD 2>/dev/null )
-            elif [[ -f "${d}/.dotest-merge/interactive" ]] ; then
-                r="rebase-i"
-                b=$(<${d}/.dotest-merge/head-name)
-            elif [[ -d "${d}/../.dotest-merge" ]] ; then
-                r="rebase-m"
-                b=$(<${d}/.dotest-merge/head-name)
-            elif [[ -f "${d}/MERGE_HEAD" ]] ; then
-                r="merge"
-                b=$(git symbolic-ref HEAD 2>/dev/null )
-            elif [[ -f "${d}/BISECT_LOG" ]] ; then
-                r="bisect"
-                b=$(git symbolic-ref HEAD 2>/dev/null )"???"
-            else
-                r=""
-                b=$(git symbolic-ref HEAD 2>/dev/null )
-            fi
-
-            if git status | grep -q '^# Changed but not updated:' ; then
-                a="${a}*"
-            fi
-
-            if git status | grep -q '^# Changes to be committed:' ; then
-                a="${a}+"
-            fi
-
-            if git status | grep -q '^# Untracked files:' ; then
-                a="${a}?"
-            fi
-
-            b=${b#refs/heads/}
-            b=${b// }
-            [[ -n "${r}${b}${a}" ]] && s="(${r:+${r}:}${b}${a:+ ${a}})"
-        fi
-    fi
-    s="${s}${ACTIVE_COMPILER}"
-    #s="${s:+${s} }"
-    echo -n "$s"
-}
-
 virtualenv_name() {
     if [[ -n ${VIRTUAL_ENV} ]]; then
         echo "($(basename ${VIRTUAL_ENV}))"
@@ -160,13 +107,18 @@ virtualenv_name() {
 # .. works like I want it, so stick your *cough*uglycode*cough* remarks
 bash_prompt_command() {
     # How many characters of the $PWD should be kept
+    if which gsed > /dev/null; then
+        local sed="gsed"
+    else
+        local sed="sed"
+    fi
     local pwdmaxlen=25
     local pwd=${PWD/#$HOME/\~}
     local prevpwd=${pwd}
     local truncations=0
     while [ "${#pwd}" -gt "$pwdmaxlen" ]; do
         prevpwd=$pwd
-        pwd=$(echo $pwd | sed 's/\/\(.\)[^\/]\+\//\/\1\//')
+        pwd=$(echo $pwd | $sed 's/\/\(.\)[^\/]\+\//\/\1\//')
         if [ "$pwd" = "$prevpwd" ]; then 
             break; 
         else
