@@ -49,6 +49,15 @@ xterm*|rxvt*)
     ;;
 esac
 
+# If this is gnome-terminal, set to 256 colors
+case "$COLORTERM" in
+    gnome-terminal)
+        TERM="xterm-256color"
+        ;;
+    *)
+        ;;
+esac
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -204,6 +213,10 @@ export GOARCH=386
 function shareit { 
     scp $1 blackhole.hvergi.net:/home/arnar/public_html; 
     echo "http://www.hvergi.net/arnar/public/$(basename $1)" | xclip ; 
+}
+
+function pp {
+    pygmentize -g $1 | less -R ;
 }
 
 # For python interpreter
