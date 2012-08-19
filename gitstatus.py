@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+# Original source: https://github.com/olivierverdier/zsh-git-prompt
+# Modifications by Arnar
+
 from __future__ import print_function
 
 # change those symbols to whatever you prefer
