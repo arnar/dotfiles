@@ -1,0 +1,4 @@
+# Set with git config --global core.excludesfile ~/.dotfiles/global-gitignore
+.*.swp
+*.pyc
+*.o
