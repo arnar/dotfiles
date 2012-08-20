@@ -7,13 +7,15 @@ PROMPT='%{$fg[$NCOLOR]%}%n%{$fg[green]%}@%m%{$reset_color%}:%{$fg_bold[blue]%}%~
 $(git_super_status)\
 %(!.#.$) '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
-RPS1='${virtualenv_name}'
+RPS1='$(virtualenv_name)'
 
 virtualenv_name() {
     if [[ -n ${VIRTUAL_ENV} ]]; then
-        echo "($(basename ${VIRTUAL_ENV}))"
+        echo "%{$fg[black]%}[ve:%{$fg_bold[black]%}$(basename ${VIRTUAL_ENV})%{$reset_color$fg[black]%}]%{$reset_color%}"
     fi
 }
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 #autoload -U colors
 #colors
