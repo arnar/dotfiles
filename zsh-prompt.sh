@@ -114,7 +114,7 @@ dir_abbrev() {
     local truncations=0
     while [ "${#pwd}" -gt "$pwdmaxlen" ]; do
         prevpwd=$pwd
-        pwd=$(echo $pwd | $sed -E 's/\/(.)[^/]+\//\/\1\//')
+        pwd=$(echo $pwd | $sed -E 's/\/(\.?[^.])[^/]+\//\/\1\//')
         if [ "$pwd" = "$prevpwd" ]; then
             break;
         else
