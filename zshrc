@@ -23,7 +23,11 @@ bindkey '^N' history-search-forward
 # Set up the prompt with git stuff etc.
 source $HOME/.dotfiles/zsh-prompt.sh
 
-export PATH=/usr/local/bin:$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+export PATH=/usr/local/sbin:/usr/local/bin:$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+
+if [ -d /usr/local/share/npm/bin ]; then
+  export PATH=$PATH:/usr/local/share/npm/bin
+fi
 
 # Linux / mac specific settings
 if [ "$(uname)" != "Darwin" ]; then
