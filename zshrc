@@ -40,6 +40,14 @@ if [ "$(uname)" != "Darwin" ]; then
     scp $1 blackhole.hvergi.net:/home/arnar/public_html; 
     echo "http://www.hvergi.net/arnar/public/$(basename $1)" | xclip ; 
   }
+
+  # pacman (arch linux package manager)
+  alias pacinstall='sudo pacman -S'
+  alias pacremove='sudo pacman -Rs'
+  alias pacupdate='echo "Forcing package database update."; sudo pacman -Syy'
+  alias pacupgrade='sudo pacman -Syu'
+  alias pacsearch='sudo pacman -Ss'
+  alias pacshow='sudo pacman -Si'
 else
   # for mac
   alias f="open"
