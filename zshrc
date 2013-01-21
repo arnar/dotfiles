@@ -23,7 +23,11 @@ bindkey '^N' history-search-forward
 # Set up the prompt with git stuff etc.
 source $HOME/.dotfiles/zsh-prompt.sh
 
-export PATH=/usr/local/bin:$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+export PATH=/usr/local/sbin:/usr/local/bin:$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin
+
+if [ -d /usr/local/share/npm/bin ]; then
+  export PATH=$PATH:/usr/local/share/npm/bin
+fi
 
 # Linux / mac specific settings
 if [ "$(uname)" != "Darwin" ]; then
@@ -36,6 +40,14 @@ if [ "$(uname)" != "Darwin" ]; then
     scp $1 blackhole.hvergi.net:/home/arnar/public_html; 
     echo "http://www.hvergi.net/arnar/public/$(basename $1)" | xclip ; 
   }
+
+  # pacman (arch linux package manager)
+  alias pacinstall='sudo pacman -S'
+  alias pacremove='sudo pacman -Rs'
+  alias pacupdate='echo "Forcing package database update."; sudo pacman -Syy'
+  alias pacupgrade='sudo pacman -Syu'
+  alias pacsearch='sudo pacman -Ss'
+  alias pacshow='sudo pacman -Si'
 else
   # for mac
   alias f="open"
