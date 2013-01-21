@@ -34,7 +34,6 @@ if [ "$(uname)" != "Darwin" ]; then
   # For linux
   alias vol="amixer sset Master"
   alias f="xdg-open"
-  alias ack="ack-grep"
   alias vi="vim -v"
   function shareit { 
     scp $1 blackhole.hvergi.net:/home/arnar/public_html; 
@@ -48,6 +47,7 @@ if [ "$(uname)" != "Darwin" ]; then
   alias pacupgrade='sudo pacman -Syu'
   alias pacsearch='sudo pacman -Ss'
   alias pacshow='sudo pacman -Si'
+  alias pacfiles='sudo pacman -Ql'
 else
   # for mac
   alias f="open"
@@ -69,7 +69,11 @@ export PYTHONSTARTUP=~/.dotfiles/pystartup
 # Virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/chalmers
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -x /usr/local/bin/virtualenvwrapper.sh ]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+elif [ -x /usr/bin/virtualenvwrapper.sh ]; then
+  source /usr/bin/virtualenvwrapper.sh
+fi
 
 # Get smarter every day
 echo
