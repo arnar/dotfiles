@@ -1,5 +1,5 @@
 # Set with git config --global core.excludesfile ~/.dotfiles/global-gitignore
-.*.swp
+.*.sw[po]
 *.pyc
 *.o
 .DS_Store

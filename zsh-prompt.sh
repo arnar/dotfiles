@@ -3,7 +3,7 @@
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-PROMPT='%{$fg[$NCOLOR]%}%n%{$fg[green]%}@%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}\
+PROMPT='%{$fg[$NCOLOR]%}%n%{$fg[green]%}@%m%{$reset_color%}:${PWD_ABBR}%{$reset_color%}\
 $(git_super_status)\
 %(!.#.$) '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
@@ -28,6 +28,8 @@ autoload -U add-zsh-hook
 add-zsh-hook chpwd chpwd_update_git_vars
 add-zsh-hook preexec preexec_update_git_vars
 add-zsh-hook precmd precmd_update_git_vars
+
+add-zsh-hook chpwd dir_abbrev
 
 ## Function definitions
 function preexec_update_git_vars() {
@@ -97,6 +99,47 @@ git_super_status() {
 	  echo "$STATUS"
 	fi
 }
+
+# pwd string abbreviation
+dir_abbrev() {
+    # How many characters of the $PWD should be kept
+    local pwdmaxlen=25
+    if which gsed > /dev/null; then
+        local sed="gsed"
+    else
+        local sed="sed"
+    fi
+    local pwd=${PWD/#$HOME/\~}
+    local prevpwd=${pwd}
+    local truncations=0
+    while [ "${#pwd}" -gt "$pwdmaxlen" ]; do
+        prevpwd=$pwd
+        pwd=$(echo $pwd | $sed -E 's/\/(\.?[^.])[^/]+\//\/\1\//')
+        if [ "$pwd" = "$prevpwd" ]; then
+            break;
+        else
+            truncations=$((truncations + 1))
+        fi
+    done
+    # Indicate that there has been dir truncation
+    local new_pwd_rest=$pwd
+    local new_pwd_trunc=""
+    if [ "$truncations" -gt "0" ]; then
+        if [ "${pwd:0:1}" = '~' ]; then
+            new_pwd_trunc=${pwd:0:$(($truncations * 2 + 2))}
+            new_pwd_rest=${pwd:$(($truncations * 2 + 2))}
+        else
+            new_pwd_trunc=${pwd:0:$(($truncations * 2 + 1))}
+            new_pwd_rest=${pwd:$(($truncations * 2 + 1))}
+        fi
+    fi
+    local blue=$fg[blue]
+    local BLUE=$fg_bold[blue]
+    export PWD_ABBR=$blue$new_pwd_trunc$BLUE$new_pwd_rest
+}
+
+# Execute the above once to set initial $PWD_ABBR
+dir_abbrev
 
 # Default values for the appearance of the prompt. Configure at will.
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}("
