@@ -48,6 +48,9 @@ if [ "$(uname)" != "Darwin" ]; then
   alias pacsearch='sudo pacman -Ss'
   alias pacshow='sudo pacman -Si'
   alias pacfiles='sudo pacman -Ql'
+  
+  # Printing at chalmers
+  export CUPS_GSSSERVICENAME=HTTP
 else
   # for mac
   alias f="open"
