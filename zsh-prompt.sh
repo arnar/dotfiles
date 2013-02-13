@@ -135,7 +135,7 @@ dir_abbrev() {
     fi
     local blue=$fg[blue]
     local BLUE=$fg_bold[blue]
-    export PWD_ABBR=$blue$new_pwd_trunc$BLUE$new_pwd_rest
+    export PWD_ABBR="%{$blue%}$new_pwd_trunc%{$BLUE%}$new_pwd_rest"
 }
 
 # Execute the above once to set initial $PWD_ABBR
