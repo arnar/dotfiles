@@ -1,10 +1,21 @@
 background no
-out_to_console yes
-out_to_x no
+out_to_console no
+own_window no
+double_buffer yes
+out_to_x yes
 update_interval 1.0
 total_run_times 0
 use_spacer none
 
+use_xft
+xftfont Droid Sans Mono:size=10
+draw_shades no
+default_color gray
+
+alignment top_right
+gap_x 50
+gap_y 3 
+
+#${image $HOME/Downloads/test.png -p 0,-1} ${offset 10} \
 TEXT
 ${time %A %d. %b %H:%M}
-
