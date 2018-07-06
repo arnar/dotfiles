@@ -1,21 +1,32 @@
-background no
+background yes 
 out_to_console no
 own_window no
+#own_window_colour 434541
+#own_window_transparent no
+#own_window_type desktop
 double_buffer yes
 out_to_x yes
 update_interval 1.0
 total_run_times 0
 use_spacer none
+gap_x 0
+gap_y -5 
+
+lua_load ~/.conky.lua
 
 use_xft
-xftfont Droid Sans Mono:size=10
+xftfont PxPlus IBM VGA8:pixelsize=16
 draw_shades no
-default_color gray
+default_color white
 
-alignment top_right
-gap_x 50
-gap_y 3 
+alignment top_left
 
 #${image $HOME/Downloads/test.png -p 0,-1} ${offset 10} \
 TEXT
-${time %A %d. %b %H:%M}
+${goto 40}${color 434541}${lua_bar 20,3995 id 100}${color}${voffset -27}
+${color cccccc}${goto 3100}\
+${exec date -u +%H:%M} // ${exec grep KPAO ~/metars.txt}\
+         ${time %a/%d %H:%M}${color}
+${voffset -100}${goto 520}${font Quicksand Light - U:pixelsize=150}${time %H:%M}${font}
+#
+${voffset 1200}${goto 3400}${font Quicksand Light - U:pixelsize=150}${time %H:%M}${font}

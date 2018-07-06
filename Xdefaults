@@ -1,28 +1,20 @@
-#URxvt*transparent: true
-#URxvt*tintColor: gray16
-#URxvt*shading: 40
 URxvt*saveLines: 12000
-URxvt*font: xft:Droid Sans Mono Slashed for Powerline:pixelsize=13:antialias=true:hinting=true
-URxvt*boldFont: xft:Droid Sans Mono Slashed for Powerline:pixelsize=13:antialias=true:hinting=true
-#URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=12:antialias=true:hinting=true
-#URxvt*boldFont: xft:Bitstream Vera Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
-#URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
-#URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
-#URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
-#URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=13:antialias=true:hinting=true
-#URxvt*font: xft:terminus:pixelsize=15
-#URxvt*boldFont: xft:terminus:bold:pixelsize=15
-#URxvt*font:-*-courier-medium-r-normal-*-14-*-*-*-*-*-iso8859-1
-#URxvt*boldFont:-*-courier-bold-r-normal-*-14-*-*-*-*-*-iso8859-1
+#URxvt*font: xft:Source Code Pro for Powerline:pixelsize=13:antialias=true:hinting=true
+#URxvt*boldFont: xft:Source Code Pro for Powerline:pixelsize=13:antialias=true:hinting=true
+URxvt*font: xft:PxPlus IBM VGA8:pixelsize=16:antialias=false:hinting=true
+URxvt*boldFont: xft:PxPlus IBM VGA8:pixelsize=16:antialias=false:hinting=true
+#URxvt*letterSpace: -1
 URxvt*scrollBar: false
 URxvt*scrollBar_right: false
 URxvt*scrollstyle: rxvt
 URxvt*urgentOnBell: true
 URxvt*visualBell: true
+URxvt*termName: rxvt-unicode-256color
+URxvt*internalBorder: 2
 
 #
 URxvt.foreground: #C8C8C8
-URxvt.background: #323232
+URxvt.background: #020202
 URxvt.color0:     #2E3436
 URxvt.color1:     #CC0000
 URxvt.color2:     #4E9A06
@@ -39,7 +31,13 @@ URxvt.color12:    #729FCF
 URxvt.color13:    #AD7FA8
 URxvt.color14:    #34E2E2
 URxvt.color15:    #EEEEEC
+
+URxvt.color200:   #FF00FF
 #
 URxvt.transparent: true
 URxvt.shading:     17
 URxvt.fading:      20
+
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
