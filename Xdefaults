@@ -41,3 +41,8 @@ URxvt.fading:      20
 URxvt.perl-ext-common: default,matcher
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
+
+URxvtFuzzy*internalBorder: 15
+URxvtFuzzy.foreground: #cccccc
+URxvtFuzzy.background: #333333
+URxvtFuzzy.transparent: false

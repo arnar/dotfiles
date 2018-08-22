@@ -1,32 +1,33 @@
-background yes 
-out_to_console no
-own_window no
-#own_window_colour 434541
-#own_window_transparent no
-#own_window_type desktop
-double_buffer yes
-out_to_x yes
-update_interval 1.0
-total_run_times 0
-use_spacer none
-gap_x 0
-gap_y -5 
+conky.config={
+	background=true,
+	out_to_console=false,
+	own_window=false,
+	double_buffer=true,
+	out_to_x=true,
+	update_interval=1.0,
+	total_run_times=0,
+	use_spacer="none",
+	gap_x=0,
+	gap_y=-5,
 
-lua_load ~/.conky.lua
+	lua_load="~/.dotfiles/conky.lua",
 
-use_xft
-xftfont PxPlus IBM VGA8:pixelsize=16
-draw_shades no
-default_color white
+	use_xft=true,
+	font="PxPlus IBM VGA8:pixelsize=16",
+	draw_shades=false,
+	default_color="white",
 
-alignment top_left
+	alignment="top_left",
+}
 
-#${image $HOME/Downloads/test.png -p 0,-1} ${offset 10} \
-TEXT
-${goto 40}${color 434541}${lua_bar 20,3995 id 100}${color}${voffset -27}
-${color cccccc}${goto 3100}\
-${exec date -u +%H:%M} // ${exec grep KPAO ~/metars.txt}\
-         ${time %a/%d %H:%M}${color}
+conky.text = [[
+${goto 40}${color 434541}${lua_bar 20,3995 id 100}${color}${voffset -28}
+${goto 3100}\
+${color 999999}${exec date -u +%H:%M} // ${exec grep KPAO ~/metars.txt}\
+${color cccccc}   ${time %a/%d} ${color 00cc00}${time %H:%M}\
+#${color 999999}   ${cpubar cpu0 10,100}
+${color 999999}   ${cpugraph cpu0 10,100 666666 33ccff -t} ${cpu cpu0}%
+${color}
 ${voffset -100}${goto 520}${font Quicksand Light - U:pixelsize=150}${time %H:%M}${font}
-#
 ${voffset 1200}${goto 3400}${font Quicksand Light - U:pixelsize=150}${time %H:%M}${font}
+]]

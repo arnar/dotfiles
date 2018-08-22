@@ -9,6 +9,7 @@ feh --bg-fill ~/Pictures/desktop1.jpg --bg-fill ~/Pictures/verticaldesktop1.jpg
 #~/tools/dzen/dzen2 -dock -h 21 -bg '#303030' &
 # xautolock -time 5 -locker "/usr/bin/xlock -mode goop" &
 conky &
+urxvtd &
 xmonad & wmpid=$!
 trayer --edge top --align right --SetPartialStrut false --transparent true --tint '0x434541' --alpha 0 --height 21 --widthtype request --monitor 1 &
 /usr/share/goobuntu-indicator/goobuntu_indicator.py &
