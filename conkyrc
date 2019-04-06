@@ -18,10 +18,11 @@ conky.config={
 	default_color="white",
 
 	alignment="top_left",
+	xinerama_head=1,
 }
 
 conky.text = [[
-${goto 40}${color 434541}${lua_bar 20,3995 id 100}${color}${voffset -28}
+${color 434541}${lua_bar 20,3959 id 100}${color}${voffset -28}
 ${goto 3100}\
 ${color 999999}${exec date -u +%H:%M} // ${exec grep KPAO ~/metars.txt}\
 ${color cccccc}   ${time %a/%d} ${color 00cc00}${time %H:%M}\

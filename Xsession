@@ -5,7 +5,7 @@ xcompmgr -a &
 redshift &
 gnome-settings-daemon &
 #feh --bg-fill ~/Documents/p/hornbg.png
-feh --bg-fill ~/Pictures/desktop1.jpg --bg-fill ~/Pictures/verticaldesktop1.jpg 
+feh --bg-fill ~/Pictures/verticaldesktop1.jpg --bg-fill ~/Pictures/desktop1.jpg 
 #~/tools/dzen/dzen2 -dock -h 21 -bg '#303030' &
 # xautolock -time 5 -locker "/usr/bin/xlock -mode goop" &
 conky &
