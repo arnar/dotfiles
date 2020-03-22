@@ -562,8 +562,7 @@ before packages are loaded."
                  ;; if you pressed "q" in the template selection.
                  (delete-frame)
                  ;; This is needed to stop listening for keystrokes in the main window.
-                 (keyboard-quit))))
-      (org-capture))))
+                 (keyboard-quit)))))))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
