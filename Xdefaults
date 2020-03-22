@@ -8,13 +8,15 @@ URxvt*scrollBar: false
 URxvt*scrollBar_right: false
 URxvt*scrollstyle: rxvt
 URxvt*urgentOnBell: true
-URxvt*visualBell: true
+URxvt*visualBell: false
 URxvt*termName: rxvt-unicode-256color
 URxvt*internalBorder: 2
 
-#
+# If using compositor:
+URxvt.depth: 32
 URxvt.foreground: #C8C8C8
-URxvt.background: #020202
+#URxvt.background: #020202
+URxvt.background: rgba:0200/0200/0200/cccc
 URxvt.color0:     #2E3436
 URxvt.color1:     #CC0000
 URxvt.color2:     #4E9A06
@@ -33,8 +35,8 @@ URxvt.color14:    #34E2E2
 URxvt.color15:    #EEEEEC
 
 URxvt.color200:   #FF00FF
-#
-URxvt.transparent: true
+# change to true if not using composite mgr (uses fake transparancy)
+URxvt.transparent: false
 URxvt.shading:     17
 URxvt.fading:      20
 
@@ -43,6 +45,11 @@ URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 
 URxvtFuzzy*internalBorder: 15
-URxvtFuzzy.foreground: #cccccc
-URxvtFuzzy.background: #333333
-URxvtFuzzy.transparent: false
+URxvtFuzzy.depth: 32
+URxvtFuzzy.foreground: #333333
+URxvtFuzzy.cursorColor: #cc0000
+URxvtFuzzy.cursorBlink: true
+URxvtFuzzy.cursorUnderline: true
+URxvtFuzzy.background: rgba:dd00/dd00/dd00/cc00
+URxvtFuzzy.font: xft:RobotoMono Nerd Font Mono:style=Light:pixelsize=30:antialias=true:hinting=true
+URxvtFuzzy.boldFont: xft:RobotoMono Nerd Font Mono:style=Light Italic:pixelsize=30:antialias=true:hinting=true
