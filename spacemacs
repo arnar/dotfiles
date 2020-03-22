@@ -69,8 +69,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages
    '(nord-theme
      (nerd-fonts :location (recipe :fetcher github :repo "twlz0ne/nerd-fonts.el"))
-     git-modes
-     )
+     (git-modes :location (recipe :fetcher github :repo "magit/git-modes")))
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
