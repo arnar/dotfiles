@@ -10,10 +10,9 @@ if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
 setopt PROMPT_SUBST
-PROMPT='%{$fg[$NCOLOR]%}%n%{$fg[green]%}@%m%{$reset_color%}:%~$%{$reset_color%}%(!.#.$) '
+PROMPT='%{$fg[$NCOLOR]%}%n%{$fg[green]%}@%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}%(!.#.$) '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 
-alias ls='ls --color'
 alias ll='ls -l'
 
 alias ..='cd ..'
