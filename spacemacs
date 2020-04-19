@@ -32,7 +32,12 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(rust
+   '(javascript
+     html
+     yaml
+     yaml
+     python
+     rust
      haskell
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -546,7 +551,7 @@ before packages are loaded."
       "Advise capture-finalize to close the frame"
       (if (equal "*Org Capture*" (frame-parameter nil 'name))
           (delete-frame)))
-    (defun make-capture-frame ()
+    (defun make-capture-frame (&optional capture-url)
       "Create a new frame and run org-capture. Call with emacsclient -ne '(make-capture-frame)'"
       (interactive)
       (make-frame '((name . "*Org Capture*")
@@ -554,14 +559,19 @@ before packages are loaded."
                     (height . 15)))
       (select-frame-by-name "*Org Capture*")
       (condition-case err
-          (org-capture)
+          (if capture-url (org-protocol-capture capture-url) (org-capture))
+
         (error (message (format "Caught exception: [%s]" err))
                (when (equal "*Org Capture*" (frame-parameter nil 'name))
                  ;; Delete the frame if there was an error, which is the case in particular
                  ;; if you pressed "q" in the template selection.
                  (delete-frame)
                  ;; This is needed to stop listening for keystrokes in the main window.
-                 (keyboard-quit)))))))
+                 (keyboard-quit)))))
+    (add-to-list 'org-protocol-protocol-alist
+                 '("org-capture" :protocol "capture"
+                   :function make-capture-frame
+                   :kill-client t))))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
