@@ -47,7 +47,7 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      (auto-completion :variables
-                      auto-completion-return-key-behavior nil
+                      ;auto-completion-return-key-behavior nil
                       auto-completion-tab-key-behavior 'complete
                       auto-completion-enable-sort-by-usage t
                       auto-completion-private-snippets-directory nil)
@@ -59,8 +59,12 @@ This function should only modify configuration layer settings."
           lsp-ui-doc-enable nil
           lsp-ui-sideline-code-actions-prefix " "
           lsp-ui-sideline-show-hover nil
+          lsp-signature-auto-activate nil
           lsp-rust-server 'rust-analyzer
-          lsp-rust-analyzer-server-display-inlay-hints t)
+          lsp-rust-analyzer-server-display-inlay-hints t
+          lsp-rust-analyzer-display-parameter-hints t
+          lsp-rust-analyzer-display-chaining-hints t
+          lsp-semantic-highlighting :immediate)
      markdown
      multiple-cursors
      org
@@ -502,7 +506,9 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  )
+  (when (eq system-type 'darwin)
+    (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
+    (setenv "PATH" (concat (getenv "PATH") "~/.cargo/bin"))))
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
