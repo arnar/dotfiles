@@ -18,17 +18,16 @@ conky.config={
 	default_color="white",
 
 	alignment="top_left",
-	xinerama_head=1,
+	xinerama_head=0,
 }
 
 conky.text = [[
-${color 434541}${lua_bar 20,3959 id 100}${color}${voffset -28}
-${goto 3100}\
-${color 999999}${exec date -u +%H:%M} // ${exec grep KPAO ~/metars.txt}\
+${color 434541}\
+${lua_bar 19,2959 id 100}${color}\
+${voffset 8}\
+${goto 1210}${color 999999}${exec date -u +%H:%M}\
 ${color cccccc}   ${time %a/%d} ${color 00cc00}${time %H:%M}\
-#${color 999999}   ${cpubar cpu0 10,100}
-${color 999999}   ${cpugraph cpu0 10,100 666666 33ccff -t} ${cpu cpu0}%
-${color}
-${voffset -100}${goto 520}${font Quicksand Light - U:pixelsize=150}${time %H:%M}${font}
-${voffset 1200}${goto 3400}${font Quicksand Light - U:pixelsize=150}${time %H:%M}${font}
+${color 6699ff}   ${battery_bar 10,100}${voffset -19}\
+${color 999999}  ${battery_time}
+${color}${voffset 840}${goto 1550}${font Quicksand Light - U:pixelsize=150}${time %H:%M}${font}
 ]]
