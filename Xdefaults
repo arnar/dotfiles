@@ -1,9 +1,10 @@
 URxvt*saveLines: 12000
 #URxvt*font: xft:Source Code Pro for Powerline:pixelsize=13:antialias=true:hinting=true
 #URxvt*boldFont: xft:Source Code Pro for Powerline:pixelsize=13:antialias=true:hinting=true
-URxvt*font: xft:PxPlus IBM VGA8:pixelsize=16:antialias=false:hinting=true
-URxvt*boldFont: xft:PxPlus IBM VGA8:pixelsize=16:antialias=false:hinting=true
+#URxvt*font: xft:PxPlus IBM VGA8:pixelsize=16:antialias=false:hinting=true
+#URxvt*boldFont: xft:PxPlus IBM VGA8:pixelsize=16:antialias=false:hinting=true
 #URxvt*letterSpace: -1
+URxvt*font: xft:Cascadia Code:size=10
 URxvt*scrollBar: false
 URxvt*scrollBar_right: false
 URxvt*scrollstyle: rxvt
@@ -51,5 +52,7 @@ URxvtFuzzy.cursorColor: #cc0000
 URxvtFuzzy.cursorBlink: true
 URxvtFuzzy.cursorUnderline: true
 URxvtFuzzy.background: rgba:dd00/dd00/dd00/cc00
-URxvtFuzzy.font: xft:RobotoMono Nerd Font Mono:style=Light:pixelsize=30:antialias=true:hinting=true
-URxvtFuzzy.boldFont: xft:RobotoMono Nerd Font Mono:style=Light Italic:pixelsize=30:antialias=true:hinting=true
+#URxvtFuzzy.font: xft:RobotoMono Nerd Font Mono:style=Light:pixelsize=30:antialias=true:hinting=true
+#URxvtFuzzy.boldFont: xft:RobotoMono Nerd Font Mono:style=Light Italic:pixelsize=30:antialias=true:hinting=true
+URxvtFuzzy.font: xft:Cascadia Code:style=ExtraLight:size=30:antialias=true:hinting=trues
+URxvtFuzzy.boldFont: xft:Cascadia Code:style=Light:slant=italic:size=30:antialias=true:hinting=true
