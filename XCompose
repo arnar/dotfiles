@@ -1,0 +1,8 @@
+include "%L"
+
+# EMOTICONS
+<Multi_key> <o> <underscore> <o>                    : "ಠ_ಠ"                 # LOOK OF DISAPPROVAL
+<Multi_key> <t> <f>                                 : "(╯°□°）╯︵ ┻━┻)"     # TABLE FLIP
+<Multi_key> <i> <d> <k>                             : "¯\\_(ツ)_/¯"         # SHRUG
+<Multi_key> <n> <o> <t> <e>                         : "🎶"                  # NOTE
+<Multi_key> <n> <o> <t> <e> <1>                     : "♫"                   # NOTE
