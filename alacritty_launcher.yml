@@ -1,0 +1,44 @@
+env:
+  TERM: alacritty-direct
+
+window:
+  class:
+    general: URxvtFuzzy
+    instance: URxvtFuzzy
+  dimensions:
+    columns: 60
+    lines: 5
+  padding:
+    x: 15
+    y: 15
+
+cursor:
+  style:
+    shape: Underline
+    blinking: Always
+  unfocused_hollow: false
+
+background_opacity: 0.8
+
+font:
+  normal:
+    family: Cascadia Code PL
+    style: ExtraLight
+  bold:
+    family: Cascadia Code PL
+    style: Light Italic
+  italic:
+    family: Cascadia Code PL
+    style: ExtraLight Italic
+  bold_italic:
+    family: Cascadia Code PL
+    style: Light Italic
+  size: 30
+
+colors:
+  primary:
+    background: '#dddddd'
+    foreground: '#333333'
+  cursor:
+    text: CellBackground
+    cursor: '#cc0000'
